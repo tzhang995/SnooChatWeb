@@ -1,0 +1,11 @@
+{
+  "name": "snoochatweb",
+  "version": "1.0.0",
+  "description": "A chatroom using subreddits as channels",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tony Zhang",
+  "license": "ISC"
+}
