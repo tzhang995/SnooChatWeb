@@ -34,4 +34,8 @@ module.exports = function(app, passport) {
       next( new Error(403) );
     }
   });
+
+  app.get('/r/:subreddit', function(req, res){
+    res.render("asdlkasda");
+  });
 };

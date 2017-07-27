@@ -40,9 +40,9 @@
 </head>
 <body>
 	<% if (typeof user == 'undefined') { %>
-		<h1>ANON</h1>
+		<h1 id="username">anonymous</h1>
 	<% } else { %>
-		<h1><%= user.name %></h1>
+		<h1 id="username"><%= user.name %></h1>
 	<% } %>
   <div id="messages">
   	<span id="message-filler"></span>
@@ -57,9 +57,9 @@
   		Send
   	</button>
   </form>
-  <button id="sign-in">
+  <a href="http://localhost:8080/auth/reddit" class="button" id="sign-in">
   	Sign In
-  </button>
+  </a>
   <!-- Import and configure the Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-auth.js"></script>

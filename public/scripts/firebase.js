@@ -7,12 +7,11 @@ function SnooChat() {
 	this.messageForm = document.getElementById('message-form');
 	this.messageInput = document.getElementById('message');
 	this.submitButton = document.getElementById('submit');
- 	this.signInButton = document.getElementById('sign-in');
+	this.username = document.getElementById('username');
 
- 	this.signInButton.addEventListener('click', this.signIn.bind(this));
 	this.submitButton.addEventListener('click', this.saveMessage.bind(this));
 	this.initFirebase();
-	this.signInButton.click();
+	this.signIn();
 }
 
 SnooChat.prototype.initFirebase = function() {
@@ -86,7 +85,7 @@ SnooChat.prototype.saveMessage = function(e) {
     var currentUser = this.auth.currentUser;
     // Add a new message entry to the Firebase Database.
     this.messagesRef.push({
-      name: "anonymous",
+      name: this.username.innerHTML,
       text: this.messageInput.value,
       photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
     }).then(function() {
