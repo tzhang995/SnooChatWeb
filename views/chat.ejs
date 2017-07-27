@@ -39,6 +39,11 @@
 	<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+	<% if (typeof user == 'undefined') { %>
+		<h1>ANON</h1>
+	<% } else { %>
+		<h1><%= user.name %></h1>
+	<% } %>
   <div id="messages">
   	<span id="message-filler"></span>
   </div>

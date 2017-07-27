@@ -1,16 +1,37 @@
+var crypto = require('crypto')
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
   app.get('/', function(req, res) {
-    res.render('chat.ejs'); // load the index.ejs file
+    if (req.isAuthenticated()) {
+      console.log("authenticated");
+      res.render('chat.ejs', {
+        user : req.user
+      }); // load the index.ejs file
+    } else {
+      console.log("not authenticated");
+      res.render('chat.ejs');
+    }
   });
 
-  app.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('usercollection');
-    collection.find({},{},function(e,docs){
-      res.render('userlist', {
-        "userlist" : docs
-      });
-    });
+  app.get('/auth/reddit', function(req, res, next){
+    req.session.state = crypto.randomBytes(32).toString('hex');
+    passport.authenticate('reddit', {
+      state: req.session.state,
+      duration: 'permanent',
+    })(req, res, next);
+  });
+
+  // the callback after google has authenticated the user
+  app.get('/auth/reddit/callback', function(req, res, next){
+    // Check for origin via state token
+    if (req.query.state == req.session.state){
+      passport.authenticate('reddit', {
+        successRedirect: '/',
+        failureRedirect: '/ASDASDS'
+      })(req, res, next);
+    }
+    else {
+      next( new Error(403) );
+    }
   });
 };
