@@ -1,4 +1,5 @@
 var crypto = require('crypto')
+var http = require('http')
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
@@ -36,6 +37,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/r/:subreddit', function(req, res){
-    res.render("asdlkasda");
+    
+    res.render("chat.ejs");
   });
 };

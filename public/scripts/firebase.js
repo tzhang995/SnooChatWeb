@@ -5,7 +5,7 @@ function SnooChat() {
 
 	this.messageList = document.getElementById('messages');
 	this.messageForm = document.getElementById('message-form');
-	this.messageInput = document.getElementById('message');
+	this.messageInput = document.getElementById('message-input');
 	this.submitButton = document.getElementById('submit');
 	this.username = document.getElementById('username');
 

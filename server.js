@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 var port = process.env.PORT || 8080;
 var app = express();
 var session      = require('express-session');
@@ -30,6 +31,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 require('./app/routes.js')(app, passport);
+
 
 app.listen(app.get('port'), function() {
 	console.log("Express started on localhost: " + app.get('port'));
