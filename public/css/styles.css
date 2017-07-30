@@ -6,8 +6,9 @@
   width: 95%;
   height: 50px;
   z-index: 99;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #fafafa;
 }
 #image-form {
   display: flex;
@@ -25,10 +26,11 @@
 
 .message-container .message {
   font-size: 200%;
+  color: black;
 }
 
 #messages {
   margin: 0;
-  padding: 0 0 50px 0;
+  padding: 0 0 0 0;
   margin-bottom: 10px;
 }

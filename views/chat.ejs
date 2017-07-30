@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Learn how to use the Firebase platform on the Web">
+	<meta name="description" content="Use Subreddits as chatroom topic">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SnooChat</title>
 
@@ -55,10 +55,21 @@
             <input class="mdl-textfield__input" type="text" id="search-field">
           </div>
         </div>
+				<a href="http://snoochat.com/auth/reddit" id="sign-in">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+						Sign In
+					</button>
+				</a>
 	    </div>
 	  </header>
 	  <div class="mdl-layout__drawer">
-	    <span class="mdl-layout-title">SnooChat</span>
+	    <span class="mdl-layout-title">
+				<% if (typeof user == 'undefined') { %>
+					<h3 id="username">anonymous</h3>
+				<% } else { %>
+					<h3 id="username"><%= user.name %></h3>
+				<% } %>
+			</span>
 	    <nav class="mdl-navigation">
 	      <a class="mdl-navigation__link" href="">All</a>
 	      <a class="mdl-navigation__link" href="">Android</a>
@@ -68,11 +79,7 @@
 	  </div>
 	  <main class="mdl-layout__content">
 
-			<!-- <% if (typeof user == 'undefined') { %>
-				<h1 id="username">anonymous</h1>
-			<% } else { %>
-				<h1 id="username"><%= user.name %></h1>
-			<% } %> -->
+
 	    <div class="page-content"><!-- Your content goes here -->
 				<div class="mdl-card__supporting-text mdl-color-text--grey-600">
 					<div id="messages">
@@ -88,11 +95,7 @@
 							Send
 						</button>
 					</form>
-					<a href="http://snoochat.com/auth/reddit" id="sign-in">
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-							Sign In
-						</button>
-					</a>
+
 				</div>
 			</div>
 	  </main>

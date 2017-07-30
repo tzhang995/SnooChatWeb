@@ -37,7 +37,9 @@ module.exports = function(app, passport) {
   });
 
   app.get('/r/:subreddit', function(req, res){
-    
-    res.render("chat.ejs");
+    res.render("chat.ejs", {
+      user : req.user,
+      subreddit : req.params.id
+    });
   });
 };
