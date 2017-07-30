@@ -8,12 +8,12 @@ module.exports = function(app, passport) {
       console.log("authenticated");
       res.render('chat.ejs', {
         user : req.user,
-        subreddit : subreddit;
+        channel : subreddit
       }); // load the index.ejs file
     } else {
       console.log("not authenticated");
       res.render('chat.ejs', {
-        subreddit : subreddit;
+        channel : subreddit
       });
     }
   });
