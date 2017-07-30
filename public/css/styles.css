@@ -2,8 +2,12 @@
   position: fixed;
   display: flex;
   flex-direction: row;
-  width: calc(100% - 48px);
-  float: left;
+  bottom: 0px;
+  width: 95%;
+  height: 50px;
+  z-index: 99;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 #image-form {
   display: flex;
@@ -21,4 +25,10 @@
 
 .message-container .message {
   font-size: 200%;
+}
+
+#messages {
+  margin: 0;
+  padding: 0 0 50px 0;
+  margin-bottom: 10px;
 }
