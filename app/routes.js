@@ -3,14 +3,18 @@ var http = require('http')
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
+    var subreddit = req.query.subreddit;
     if (req.isAuthenticated()) {
       console.log("authenticated");
       res.render('chat.ejs', {
-        user : req.user
+        user : req.user,
+        subreddit : subreddit;
       }); // load the index.ejs file
     } else {
       console.log("not authenticated");
-      res.render('chat.ejs');
+      res.render('chat.ejs', {
+        subreddit : subreddit;
+      });
     }
   });
 
@@ -37,9 +41,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/r/:subreddit', function(req, res){
-    res.render("chat.ejs", {
-      user : req.user,
-      subreddit : req.params.id
-    });
+    var string = encodeURIComponent(req.params.subreddit);
+    res.redirect('/?subreddit='+string);
   });
 };
