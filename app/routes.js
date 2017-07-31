@@ -19,6 +19,11 @@ module.exports = function(app, passport) {
     }
   });
 
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   app.get('/auth/reddit', function(req, res, next){
     req.session.state = crypto.randomBytes(32).toString('hex');
     passport.authenticate('reddit', {

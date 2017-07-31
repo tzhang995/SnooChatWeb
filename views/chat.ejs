@@ -61,11 +61,19 @@
             <input class="mdl-textfield__input" type="text" id="search-field">
           </div>
         </div>
-				<a href="http://snoochat.com/auth/reddit" id="sign-in">
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-						Sign In
-					</button>
-				</a>
+				<% if (typeof user == 'undefined') { %>
+					<a href="http://snoochat.com/auth/reddit" id="sign-in">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							Sign In
+						</button>
+					</a>
+				<% } else { %>
+					<a href="http://snoochat.com/logout" id="sign-out">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							Sign out
+						</button>
+					</a>
+				<% } %>
 	    </div>
 	  </header>
 	  <div class="mdl-layout__drawer">
