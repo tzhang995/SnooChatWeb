@@ -1,21 +1,46 @@
 var crypto = require('crypto')
-var http = require('http')
+var request = require('request');
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
     var subreddit = req.query.subreddit;
-    console.log("hello"+subreddit);
-    if (req.isAuthenticated()) {
-      console.log("authenticated");
-      res.render('chat.ejs', {
-        user : req.user,
-        channel : subreddit
-      }); // load the index.ejs file
-    } else {
-      console.log("not authenticated");
-      res.render('chat.ejs', {
-        channel : subreddit
+    if (subreddit != undefined) {
+      request('http://www.reddit.com/r/'+subreddit+'/about.json', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var newbody = JSON.parse(body);
+          var title = newbody['data']['display_name'];
+          if (title ==  undefined){
+            console.log("does not exist");
+            res.render('404page.ejs');
+          } else {
+            if (req.isAuthenticated()) {
+              console.log("authenticated");
+              res.render('chat.ejs', {
+                user : req.user,
+                channel : title
+              }); // load the index.ejs file
+            } else {
+              console.log("not authenticated");
+              res.render('chat.ejs', {
+                channel : title
+              });
+            }
+          }
+        }
       });
+    } else {
+      if (req.isAuthenticated()) {
+        console.log("authenticated");
+        res.render('chat.ejs', {
+          user : req.user,
+          channel : subreddit
+        }); // load the index.ejs file
+      } else {
+        console.log("not authenticated");
+        res.render('chat.ejs', {
+          channel : subreddit
+        });
+      }
     }
   });
 

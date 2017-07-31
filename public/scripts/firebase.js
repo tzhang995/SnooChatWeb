@@ -8,7 +8,7 @@ function SnooChat() {
 	this.messageInput = document.getElementById('message-input');
 	this.submitButton = document.getElementById('submit');
 	this.username = document.getElementById('username');
-
+	this.channel = document.getElementById('Channel');
 	this.submitButton.addEventListener('click', this.saveMessage.bind(this));
 	this.initFirebase();
 	this.signIn();
@@ -91,7 +91,7 @@ SnooChat.prototype.saveMessage = function(e) {
     }).then(function() {
       // Clear message text field and SEND button state.
       SnooChat.resetMaterialTextfield(this.messageInput);
-      this.toggleButton();
+      //this.toggleButton();
     }.bind(this)).catch(function(error) {
       console.error('Error writing new message to Firebase Database', error);
     });
@@ -99,8 +99,14 @@ SnooChat.prototype.saveMessage = function(e) {
 
 };
 
+SnooChat.resetMaterialTextfield = function(element) {
+  element.value = '';
+  element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
+};
+
 SnooChat.prototype.loadMessages = function() {
-	this.messagesRef = this.database.ref('ALL');
+	console.log(this.channel.innerHTML);
+	this.messagesRef = this.database.ref(this.channel.innerHTML);
 	this.messagesRef.off();
   // Loads the last 25 messages and listen for new ones.
   var setMessage = function(data) {
