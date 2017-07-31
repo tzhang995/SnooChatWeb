@@ -44,7 +44,11 @@
 	    <div class="mdl-layout__header-row">
 	      <!-- Title -->
 	      <span class="mdl-layout-title">
-					All
+					<% if (typeof channel == 'undefined') { %>
+						<h3 id="username">All</h3>
+					<% } else { %>
+						<h3 id="username"><%= channel %></h3>
+					<% } %>
 				</span>
 	      <!-- Add spacer, to align navigation to the right -->
 	      <div class="mdl-layout-spacer"></div>
@@ -73,10 +77,10 @@
 				<% } %>
 			</span>
 	    <nav class="mdl-navigation">
-	      <a class="mdl-navigation__link" href="">All</a>
-	      <a class="mdl-navigation__link" href="">Android</a>
-	      <a class="mdl-navigation__link" href="">UWaterloo</a>
-	      <a class="mdl-navigation__link" href="">ProgrammerHumor</a>
+	      <a class="mdl-navigation__link" href="/">All</a>
+	      <a class="mdl-navigation__link" href="/r/Android">Android</a>
+	      <a class="mdl-navigation__link" href="/r/UWaterloo">UWaterloo</a>
+	      <a class="mdl-navigation__link" href="/r/ProgrammerHumor">ProgrammerHumor</a>
 	    </nav>
 	  </div>
 	  <main class="mdl-layout__content">
@@ -110,7 +114,6 @@
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-messaging.js"></script>
-	<script src="js/libs/jquery.min.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
   <script>
@@ -126,7 +129,6 @@
     firebase.initializeApp(config);
   </script>
   <script src="scripts/firebase.js"></script>
-	<a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/android-dot-com/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a>
   <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </body>
 </html>

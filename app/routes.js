@@ -4,6 +4,7 @@ var http = require('http')
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
     var subreddit = req.query.subreddit;
+    console.log("hello"+subreddit);
     if (req.isAuthenticated()) {
       console.log("authenticated");
       res.render('chat.ejs', {
