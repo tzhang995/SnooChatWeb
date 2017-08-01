@@ -8,7 +8,7 @@
   z-index: 99;
   padding-left: 20px;
   padding-right: 20px;
-  background: #ffffff;
+  background-color: #DCDCDC;
 }
 #image-form {
   display: flex;
@@ -39,4 +39,17 @@
 .main_content{
   width: 100%;
   padding: 0;
+}
+
+.googlebadge{
+  width: 140px;
+  height: 60px;
+}
+
+.mdl-layout__header{
+  background-color: #282828;
+}
+
+body{
+  background-color: #DCDCDC;
 }

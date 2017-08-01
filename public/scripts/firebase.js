@@ -87,7 +87,7 @@ SnooChat.prototype.saveMessage = function(e) {
     this.messagesRef.push({
       name: this.username.innerHTML,
       text: this.messageInput.value,
-      photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+      photoUrl: currentUser.photoURL || ''
     }).then(function() {
       // Clear message text field and SEND button state.
       SnooChat.resetMaterialTextfield(this.messageInput);
@@ -115,6 +115,7 @@ SnooChat.prototype.loadMessages = function() {
   }.bind(this);
   this.messagesRef.limitToLast(25).on('child_added', setMessage);
   this.messagesRef.limitToLast(25).on('child_changed', setMessage);
+	scrollToBottom();
 }
 
 SnooChat.prototype.onAuthStateChanged = function(user) {
@@ -142,6 +143,11 @@ SnooChat.prototype.checkSignedInWithMessage = function() {
   } else {
 		return false;
 	}
+}
+
+function scrollToBottom() {
+	var messages = document.getElementById('messages');
+  messages.scrollTop = messages.scrollHeight;
 }
 
 window.onload = function() {
