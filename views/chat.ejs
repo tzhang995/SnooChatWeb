@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body id="body">
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 	  <header class="mdl-layout__header">
 	    <div class="mdl-layout__header-row">
@@ -97,27 +97,22 @@
 				<a class="mdl-navigation__link" href='https://play.google.com/store/apps/details?id=tzcorp.snoochat&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img  class="googlebadge" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 	    </nav>
 	  </div>
-	  <main class="mdl-layout__content">
-
-
-	    <div class="page-content"><!-- Your content goes here -->
-				<div class="mdl-card__supporting-text mdl-color-text--grey-600 main_content">
-					<div id="messages">
-						<span id="message-filler"></span>
-					</div>
-
-					<form id="message-form" action="#" autocomplete="off">
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-							<input class="mdl-textfield__input" type="text" id="message-input">
-							<label class="mdl-textfield__label" for="message">Message...</label>
-						</div>
-						<button id="submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-							Send
-						</button>
-					</form>
-
-				</div>
-			</div>
+		<main class="mdl-layout__content mdl-color--grey-100">
+	      <!-- Messages container -->
+      <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+        <div id="messages">
+          <span id="message-filler"></span>
+        </div>
+        <form id="message-form" action="#">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="message-input">
+            <label class="mdl-textfield__label" for="message">Message...</label>
+          </div>
+          <button id="submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Send
+          </button>
+        </form>
+      </div>
 	  </main>
 	</div>
 

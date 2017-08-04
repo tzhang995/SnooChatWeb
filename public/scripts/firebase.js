@@ -1,5 +1,5 @@
 'use strict';
-
+var counter = 1;
 function SnooChat() {
 	this.checkSetup();
 
@@ -58,6 +58,8 @@ SnooChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) 
     container.innerHTML = SnooChat.MESSAGE_TEMPLATE;
     div = container.firstChild;
     div.setAttribute('id', key);
+		div.className +=  ' child'+counter;
+		counter++;
     this.messageList.appendChild(div);
   }
   if (picUrl) {
@@ -96,7 +98,6 @@ SnooChat.prototype.saveMessage = function(e) {
       console.error('Error writing new message to Firebase Database', error);
     });
   }
-
 };
 
 SnooChat.resetMaterialTextfield = function(element) {
@@ -115,7 +116,6 @@ SnooChat.prototype.loadMessages = function() {
   }.bind(this);
   this.messagesRef.limitToLast(25).on('child_added', setMessage);
   this.messagesRef.limitToLast(25).on('child_changed', setMessage);
-	scrollToBottom();
 }
 
 SnooChat.prototype.onAuthStateChanged = function(user) {
@@ -145,10 +145,6 @@ SnooChat.prototype.checkSignedInWithMessage = function() {
 	}
 }
 
-function scrollToBottom() {
-	var messages = document.getElementById('messages');
-  messages.scrollTop = messages.scrollHeight;
-}
 
 window.onload = function() {
   window.snooChat = new SnooChat();
