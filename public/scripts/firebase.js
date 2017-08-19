@@ -50,7 +50,7 @@ SnooChat.MESSAGE_TEMPLATE =
 SnooChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
-SnooChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
+SnooChat.prototype.displayMessage = function(key, name, text, time) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -62,17 +62,14 @@ SnooChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) 
 		counter++;
     this.messageList.appendChild(div);
   }
-  if (picUrl) {
-    div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
-  }
-  div.querySelector('.name').textContent = name;
-  var messageElement = div.querySelector('.message');
+	var newDate = new Date(time);
+  div.querySelector('.name').textContent = name + " " + newDate.getHours()+":"+newDate.getMinutes();
+
+	var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.
     messageElement.textContent = text;
     // Replace all line breaks by <br>.
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-  } else if (imageUri) { // If the message is an image.
-    //TODO
   }
   // Show the card fading-in.
   setTimeout(function() {div.classList.add('visible')}, 1);
@@ -85,11 +82,13 @@ SnooChat.prototype.saveMessage = function(e) {
 	// Check that the user entered a message and is signed in.
 	if (this.messageInput.value && this.checkSignedInWithMessage()) {
     var currentUser = this.auth.currentUser;
+
+    var UTCstring = (new Date()).toUTCString();
     // Add a new message entry to the Firebase Database.
     this.messagesRef.push({
       name: this.username.innerHTML,
       text: this.messageInput.value,
-      photoUrl: currentUser.photoURL || ''
+			utcTime: UTCstring
     }).then(function() {
       // Clear message text field and SEND button state.
       SnooChat.resetMaterialTextfield(this.messageInput);
@@ -112,7 +111,7 @@ SnooChat.prototype.loadMessages = function() {
   // Loads the last 25 messages and listen for new ones.
   var setMessage = function(data) {
     var val = data.val();
-    this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
+    this.displayMessage(data.key, val.name, val.text, val.utcTime);
   }.bind(this);
   this.messagesRef.limitToLast(25).on('child_added', setMessage);
   this.messagesRef.limitToLast(25).on('child_changed', setMessage);

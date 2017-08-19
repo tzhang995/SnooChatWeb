@@ -75,4 +75,8 @@ module.exports = function(app, passport) {
     var string = encodeURIComponent(req.params.subreddit);
     res.redirect('/?subreddit='+string);
   });
+
+  app.get('/about', function(req, res){
+    res.render('about.ejs');
+  });
 };
