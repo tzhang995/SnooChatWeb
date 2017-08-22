@@ -9,6 +9,7 @@ function SnooChat() {
 	this.submitButton = document.getElementById('submit');
 	this.username = document.getElementById('username');
 	this.channel = document.getElementById('Channel');
+	this.onlineCount = document.getElementById('numOnline');
 	this.submitButton.addEventListener('click', this.saveMessage.bind(this));
 	this.initFirebase();
 	this.signIn();
@@ -23,6 +24,30 @@ SnooChat.prototype.initFirebase = function() {
 	this.storage = firebase.storage();
 	// Initiates Firebase auth and listen to auth state changes.
 	this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+	var counterHTML = this.onlineCount;
+
+	var myConnectionsRef = firebase.database().ref('all/connections');
+
+	var connectedRef = this.database.ref('.info/connected');
+	connectedRef.on('value', function(snap) {
+	  if (snap.val() === true) {
+	    // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
+	    var con = myConnectionsRef.push();
+
+	    // When I disconnect, remove this device
+	    con.onDisconnect().remove();
+	    // Add this device to my connections list
+	    // this value could contain info about the device or a timestamp too
+	    con.set(true);
+	  }
+	});
+	myConnectionsRef.on('child_added', function(snapshot){
+		console.log(snapshot.val());
+		myConnectionsRef.once("value").then(function(snapshot){
+			console.log(snapshot.numChildren());
+			counterHTML.innerHTML = snapshot.numChildren();
+		})
+	}.bind(this));
 };
 
 // Signs-in Friendly Chat.
