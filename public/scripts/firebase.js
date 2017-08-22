@@ -45,7 +45,7 @@ SnooChat.prototype.initFirebase = function() {
 		console.log(snapshot.val());
 		myConnectionsRef.once("value").then(function(snapshot){
 			console.log(snapshot.numChildren());
-			counterHTML.innerHTML = snapshot.numChildren();
+			counterHTML.innerHTML = snapshot.numChildren() + " online ";
 		})
 	}.bind(this));
 };
@@ -87,8 +87,12 @@ SnooChat.prototype.displayMessage = function(key, name, text, time) {
 		counter++;
     this.messageList.appendChild(div);
   }
-	var newDate = new Date(time);
-  div.querySelector('.name').textContent = name + " " + newDate.getHours()+":"+newDate.getMinutes();
+	if (time) {
+		var newDate = new Date(time);
+  	div.querySelector('.name').textContent = name + " " + newDate.getHours()+":"+newDate.getMinutes();
+	} else {
+		div.querySelector('.name').textContent = name ;
+	}
 
 	var messageElement = div.querySelector('.message');
   if (text) { // If the message is text.

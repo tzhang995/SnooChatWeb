@@ -53,6 +53,8 @@
 	      <!-- Add spacer, to align navigation to the right -->
 	      <div class="mdl-layout-spacer"></div>
 
+				<div id="numOnline">
+				</div>
 				<div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
           <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
             <i class="material-icons" id="search-button" >search</i>
@@ -61,8 +63,6 @@
             <input class="mdl-textfield__input" type="text" id="search-field">
           </div>
         </div>
-				<div id="numOnline">
-				</div>
 				<% if (typeof user == 'undefined') { %>
 					<a href="http://snoochat.com/auth/reddit" id="sign-in">
 						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
