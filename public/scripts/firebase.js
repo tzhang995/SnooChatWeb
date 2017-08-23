@@ -48,6 +48,13 @@ SnooChat.prototype.initFirebase = function() {
 			counterHTML.innerHTML = snapshot.numChildren() + " online ";
 		})
 	}.bind(this));
+	myConnectionsRef.on('child_removed', function(snapshot){
+		console.log(snapshot.val());
+		myConnectionsRef.once("value").then(function(snapshot){
+			console.log(snapshot.numChildren());
+			counterHTML.innerHTML = snapshot.numChildren() + " online ";
+		})
+	}.bind(this));
 };
 
 // Signs-in Friendly Chat.
