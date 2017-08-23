@@ -15,3 +15,14 @@ document.getElementById('search-field').onkeypress = function(e) {
     search.click();
   }
 }
+var blink = function() {
+    $('svg').animate({
+        opacity: '0'
+    }, function(){
+        $(this).animate({
+            opacity: '1'
+        }, blink);
+    });
+}
+
+blink();
