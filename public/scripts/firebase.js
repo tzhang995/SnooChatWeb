@@ -5,6 +5,8 @@ function SnooChat() {
 
 	this.messageList = document.getElementById('messages');
 	this.messageForm = document.getElementById('message-form');
+	this.shoutoutsList = document.getElementById('shoutouts');
+	this.shoutoutsForm = document.getElementById('shoutouts-form');
 	this.messageInput = document.getElementById('message-input');
 	this.submitButton = document.getElementById('submit');
 	this.username = document.getElementById('username');
@@ -152,6 +154,7 @@ SnooChat.prototype.onAuthStateChanged = function(user) {
 	if (user) {
 		console.log("Logged In");
 		this.loadMessages();
+		// this.loadShoutouts();
 	} else {
 		console.log("Logged out");
 	}
